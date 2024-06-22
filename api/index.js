@@ -1,36 +1,40 @@
-import http from "node:http";
 import express from "express";
-import path from "path";
-import { Server } from "socket.io";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import connectToMongoDb from "./db/connectToMongo.js";
 
-const __dirname = path.resolve();
+// all Routers
+import authRoutes from "./routes/auth.route.js";
+import messageRoutes from "./routes/message.route.js";
+
+dotenv.config();
+
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-const server = http.createServer(app);
-const io = new Server(server);
+// add some middleware
+app.use(express.json());
+app.use(cookieParser());
 
-// Socket.io
-
-// io.on("connection", (socket) => {
-//   console.log("a user connected");
-//   socket.on("disconnect", () => {
-//     console.log("user disconnected");
-//   });
-//   socket.on("chat message", (msg) => {
-//     console.log("message:" + msg);
-//     io.emit("chat message", msg);
-//   });
-// });
-
-app.use(express.static(path.join(__dirname, "/client/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
 
 // route middleware
-// app.use("/api/auth");
+app.use("/api/auth", authRoutes);
+app.use("/api/message", messageRoutes);
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+app.listen(PORT, () => {
+  connectToMongoDb();
+  console.log("Server is running on port " + PORT);
+});
+
+
+// error handler middleware 
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "internal server error";
+
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
 });
