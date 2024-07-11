@@ -36,7 +36,7 @@ const UserProfile = ({ currentUser, handleSignout }) => {
       {dropdownVisible && (
         <div
           ref={dropdownRef}
-          className="absolute bottom-0 left-12 mt-2 w-48 bg-gray-600 border border-gray-900 rounded-md shadow-lg"
+          className="absolute bottom-0 z-40 left-12 mt-2 w-48 bg-gray-600 border border-gray-900 rounded-md shadow-lg"
         >
           <ul className="py-1">
             <li className="px-4 py-2 hover:bg-gray-800 cursor-pointer">
@@ -45,7 +45,10 @@ const UserProfile = ({ currentUser, handleSignout }) => {
             <li className="px-4 py-2 hover:bg-gray-800 cursor-pointer">
               Settings
             </li>
-            <li onClick={handleSignout} className="px-4 py-2 hover:bg-gray-800 cursor-pointer">
+            <li
+              onClick={handleSignout}
+              className="px-4 py-2 hover:bg-gray-800 cursor-pointer"
+            >
               Logout
             </li>
           </ul>
