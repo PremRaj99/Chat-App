@@ -2,9 +2,9 @@ import React from "react";
 import formatDate from "../../utils/formatedDate";
 import { Link } from 'react-router-dom'
 
-export default function ConversationCard({ conversation, tab }) {
+export default function ConversationCard({ conversation, tab, toggleSidebar }) {
   return (
-    <Link to={`/?tab=${conversation._id}`} className={`flex items-center ${tab === conversation._id ? "bg-slate-900": "" } p-2 gap-2 hover:bg-slate-800 rounded-md w-full h-20`}>
+    <Link to={`/?tab=${conversation._id}`} onClick={toggleSidebar} className={`flex items-center ${tab === conversation._id ? "bg-slate-900": "" } p-2 gap-2 hover:bg-slate-800 rounded-md w-full h-20`}>
       <img
         src={conversation.profilePicture}
         className="aspect-square object-cover w-14 h-14"

@@ -49,8 +49,8 @@ export default function Login() {
       <h1 className="w-full h-14 bg-black text-white text-2xl font-serif shadow-md shadow-slate-500 font-semibold flex items-center p-4 absolute">
         Chat App
       </h1>
-      <div className="flex gap-10 h-screen justify-center items-center">
-        <div className="flex flex-col w-72">
+      <div className="flex flex-col md:flex-row gap-10 h-screen justify-center items-center">
+        <div className="md:flex hidden flex-col w-72">
           <img
             src="https://static.vecteezy.com/system/resources/previews/020/945/959/original/chat-app-logo-png.png"
             alt="chat app"
