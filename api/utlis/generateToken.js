@@ -6,7 +6,7 @@ const generateTokenAndSetCookie = (userId, res) => {
   });
 
   res.cookie("access_token", token, {
-    maxAge: 1 * 24 * 60 * 60 * 1000, // 1d -> ms
+    // maxAge: 1 * 24 * 60 * 60 * 1000, // 1d -> ms
     httpOnly: true,
     sameSite: "strict",
     secure: process.env.NODE_ENV !== "development",
